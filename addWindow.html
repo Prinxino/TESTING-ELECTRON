@@ -9,10 +9,33 @@
 <body>
     <form>
         <div>
-            <label>Aggiungi il Progetto</label>
+            <label>Inserisci il nome Progetto</label>
             <input type="testo" id="progetto" autofocus>
         </div>
         <button type="submit">Aggiungi</button>
+        <button type="undo" id="backBtn">Indetro</button>
     </form>
+
+    <script>
+        const electron = require('electron');
+        const ipcRenderer = require('electron').ipcRenderer;
+
+        const form = document.querySelector('form');
+        form.addEventListener('Submit', submitForm);
+
+        function submitForm(e){
+            e.preventDefault();
+            console.log(123);
+            const item = document.querySelector('#item').value;
+            ipcRenderer.send('item:add', item);
+
+        }
+
+        const backButton = document.getElementById('backBtn');
+
+        backButton.addEventListener('click',()=>{
+        ipcRenderer.send('back-to-previous');
+    });
+    </script>
 </body>
 </html>

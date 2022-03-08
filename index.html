@@ -6,10 +6,20 @@
 </head>
 <body>
     <h1>I TUOI PROGETTI</h1>
-    <p>
-        <li>
-            Primo progetto
-        </li>
-    </p>
+    <ul>
+    </ul>
+
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer}  = electron ;
+        const ul = document.querySelector('ul');
+
+        ipcRenderer.on('item:add', function(e, item){
+            const li = document.createElement('li');
+            const itemText = document.createTextNode(item);
+            li.appendChild(itemtext);
+            ul.appendChild(li);
+        })
+    </script>
 </body>
 </html>
