@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <title>PROGETTI</title>
 </head>
 <body>
@@ -23,7 +22,7 @@
         });
 
         ipcRenderer.on('item:clear', function(e, item){
-            ul.innerHTML = '';
+            ul.innerHTML = ' ';
         });
 
         function removeItem(e){

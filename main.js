@@ -62,11 +62,10 @@ ipcMain.on('back-to-previous',()=>{
 })
 
 // Catch item:add
-
-ipcMain.on('item:add', function(e, item){
+/*ipcMain.on('item:add', function(e, item){
   mainWindow.webContents,send('item:add', item);
   addWindow.close();
-});
+});*/
 
 
 // Create menu template
