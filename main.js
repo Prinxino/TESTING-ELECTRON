@@ -2,16 +2,23 @@ const { app, BrowserWindow , Menu, ipcMain, dialog} = require('electron')
 const path = require('path')
 const url = require('url')
 
+let addWindow
+let mainWindow
+
 function createWindow () {
-    const win = new BrowserWindow({
+    const mainWindow = new BrowserWindow({
       width: 800,
       height: 600,
       webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false,
+        enableRemoteModule: true,
+        devTools: true,
         preload: path.join(__dirname, 'preload.js')
       }
     })
   
-    win.loadFile('index.html')
+    mainWindow.loadFile('mainWindow.html')
 
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);
@@ -44,30 +51,22 @@ function createAddWindow(){
   }));
 };
 
-function indietroWindow(){
-    BrowserWindow.getAllWindows()[0].loadURL(url.format({
-    pathname : path.join(__dirname,'index.html'),
-    protocol:'file',
-    slashes:true
-  }));
-}
-
-// Catch item:add
-ipcMain.on('item:add', function(e, item){
-  mainWindow.webContents,send('item:add', item);
-  addWindow.close();
-});
-
 // Back BTN
 
 ipcMain.on('back-to-previous',()=>{
       BrowserWindow.getAllWindows()[0].loadURL(url.format({
-      pathname : path.join(__dirname,'index.html'),
+      pathname : path.join(__dirname,'mainWindow.html'),
       protocol:'file',
       slashes:true
     }));
 })
 
+// Catch item:add
+
+ipcMain.on('item:add', function(e, item){
+  mainWindow.webContents,send('item:add', item);
+  addWindow.close();
+});
 
 
 // Create menu template
@@ -82,13 +81,10 @@ const mainMenuTemplate = [
                 }
             },
             {
-                label: 'Elimina Progetto'
-            },
-            {
-              label: 'Indietro',
-              click(){
-                  indietroWindow();
-              }
+                label: 'Elimina Progetto',
+                click(){
+                  mainWindow.webContents.send('item:clear', item);
+                }
             },
             {
                 label: 'Esci',
