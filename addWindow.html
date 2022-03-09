@@ -7,22 +7,20 @@
     <title>Aggiungi Progetto</title>
 </head>
 <body>
-    <form>
-        <div>
-            <label>Inserisci il nome Progetto</label>
-            <input type="Text" id="item" autofocus>
-        </div>
-        <button type="submit">Aggiungi</button>
-        <button type="undo" id="backBtn">Indetro</button>
-    </form>
+    <div class="container">
+        <form>
+          <div>
+            <label>Scegli il progetto</label>
+            <input type="text" id="item" autofocus>
+          </div>
+          <button type="submit" id="submit">Aggiungi</button>
+          <button type="undo" id="backBtn">Indietro</button>
+        </form>
+      </div>
 
     <script>
         const electron = require('electron');
-        const { app, BrowserWindow } = electron;
         const {ipcRenderer}  = electron ;
-
-        const form = document.querySelector('form');
-        form.addEventListener('submit', submitForm);
 
         function submitForm(e){
             e.preventDefault();
@@ -30,6 +28,9 @@
             ipcRenderer.send('item:add', item);
 
         }
+
+        const form = document.querySelector("form");
+        form.addEventListener("submit", submitForm);
 
         const backButton = document.getElementById('backBtn');
 

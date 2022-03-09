@@ -1,6 +1,12 @@
-const { app, BrowserWindow , Menu, ipcMain, dialog} = require('electron')
-const path = require('path')
-const url = require('url')
+
+const electron = require('electron');
+const path = require('path');
+const url = require('url');
+
+// SET ENV
+process.env.NODE_ENV = 'development';
+
+const { app, BrowserWindow , Menu, ipcMain, dialog} = electron;
 
 let addWindow
 let mainWindow
@@ -22,7 +28,8 @@ function createWindow () {
 
     const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(mainMenu);
-  }
+
+  };
 
   app.whenReady().then(() => {
     createWindow()
@@ -62,11 +69,10 @@ ipcMain.on('back-to-previous',()=>{
 })
 
 // Catch item:add
-/*ipcMain.on('item:add', function(e, item){
+ipcMain.on('item:add', function(e, item){
   mainWindow.webContents,send('item:add', item);
   addWindow.close();
-});*/
-
+});
 
 // Create menu template
 const mainMenuTemplate = [
@@ -76,7 +82,7 @@ const mainMenuTemplate = [
             {
                 label: 'Aggiungi Progetto',
                 click(){
-                    createAddWindow();
+                  createAddWindow();
                 }
             },
             {
