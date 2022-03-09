@@ -5,32 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aggiungi Progetto</title>
+  <style>
+    div{
+      margin: 0 auto;
+      
+    }
+    .bottone{
+      padding-right: 25%;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <form>
-          <div>
-            <label>Scegli il progetto</label>
-            <input type="text" id="item" autofocus>
-          </div>
-          <button type="submit" id="submit">Aggiungi</button>
-          <button type="undo" id="backBtn">Indietro</button>
-        </form>
-      </div>
+    <div class="Container">
+      <h1>
+        <label for="file">File Loader</label>
+        <button type="button" id="file">Scegli File</button>
+      </h1>
+    </div>
+
+    <div class="bottone">
+      <button type="button" id="backBtn">Indietro</button>
+    </div>
 
     <script>
         const electron = require('electron');
         const {ipcRenderer}  = electron ;
-
-        function submitForm(e){
-            e.preventDefault();
-            const item = document.querySelector('#item').value;
-            ipcRenderer.send('item:add', item);
-
-        }
-
-        const form = document.querySelector("form");
-        form.addEventListener("submit", submitForm);
 
         const backButton = document.getElementById('backBtn');
 

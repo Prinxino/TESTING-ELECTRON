@@ -8,13 +8,12 @@ process.env.NODE_ENV = 'development';
 
 const { app, BrowserWindow , Menu, ipcMain, dialog} = electron;
 
-let addWindow
 let mainWindow
 
 function createWindow () {
     const mainWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
+      width: 1920,
+      height: 1080,
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false,
@@ -56,13 +55,15 @@ function createAddWindow(){
 
 // Back BTN
 
+
+
 ipcMain.on('back-to-previous',()=>{
   BrowserWindow.getAllWindows()[0].loadFile(path.join(__dirname, 'mainWindow.html'))
 })
 
 // Catch item:add
 ipcMain.on('item:add', function(e, item){
-  mainWindow.webContents,send('item:add', item);
+  //mainWindow.webContents,send('item:add', item);
 });
 
 // Create menu template
@@ -74,12 +75,6 @@ const mainMenuTemplate = [
                 label: 'Aggiungi Progetto',
                 click(){
                   createAddWindow();
-                }
-            },
-            {
-                label: 'Elimina Progetto',
-                click(){
-                  mainWindow.webContents.send('item:clear', item);
                 }
             },
             {
