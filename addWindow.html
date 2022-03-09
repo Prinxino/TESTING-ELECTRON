@@ -5,26 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aggiungi Progetto</title>
-  <style>
-    div{
-      margin: 0 auto;
+    <style>
+
+      .test2{
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+
+      .bottone{
+        padding-top: 20px;
+      }
       
-    }
-    .bottone{
-      padding-right: 25%;
-    }
-  </style>
-</head>
-<body>
-    <div class="Container">
-      <h1>
-        <label for="file">File Loader</label>
-        <button type="button" id="file">Scegli File</button>
-      </h1>
-    </div>
+    </style>
+  </head>
+  <body>
+      <div>
+          <div>
+              <div class="test2" style="text-align: center;">
+                <h1>PROGETTO</h1>
+                <input type="text" placeholder="Please select a project" id="actual-file" disabled="disabled"/>
+                <input type="button" value=":,)"/>
+              </div>
+              <div class="test" style="text-align: center;">
+                <input type="button" id="save-changes" value="Save changes"/>
+                <input type="button" id="delete-file" value="Delete file"/>
+              </div>
+          </div>
+      </div>
 
     <div class="bottone">
-      <button type="button" id="backBtn">Indietro</button>
+        <button type="button" id="backBtn">Indietro</button>
     </div>
 
     <script>
