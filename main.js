@@ -51,27 +51,18 @@ function createWindow () {
 //  Funzione Aggiungi Progetto
 
 function createAddWindow(){
-    BrowserWindow.getAllWindows()[0].loadURL(url.format({
-    pathname : path.join(__dirname,'addWindow.html'),
-    protocol:'file',
-    slashes:true
-  }));
+    BrowserWindow.getAllWindows()[0].loadFile(path.join(__dirname, 'addWindow.html'))
 };
 
 // Back BTN
 
 ipcMain.on('back-to-previous',()=>{
-      BrowserWindow.getAllWindows()[0].loadURL(url.format({
-      pathname : path.join(__dirname,'mainWindow.html'),
-      protocol:'file',
-      slashes:true
-    }));
+  BrowserWindow.getAllWindows()[0].loadFile(path.join(__dirname, 'mainWindow.html'))
 })
 
 // Catch item:add
 ipcMain.on('item:add', function(e, item){
   mainWindow.webContents,send('item:add', item);
-  addWindow.close();
 });
 
 // Create menu template
